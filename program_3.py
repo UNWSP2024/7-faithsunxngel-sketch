@@ -1,25 +1,46 @@
 # Program #3: US_Population
+# Program #3: US_Population
+
 def main():
-    # Have the user input (using a loop) various information that contains three pieces of data: 
-    # year, name of state, and population.  
-    # Store all of this information in a list of lists.  For example it might be stored like this:
-    
-    # [[2010, "Maine", 1987435], [2010,"Minnesota",6873202], [2011, "Iowa", 3421988]]
     all_entered_values = []
 
-    # Now have the user enter a year. 
-    
-    # The program will add the populations from all states in the list of list for that year only.
-    # Pass the list and year to the sum_population_for_year
+    print("Enter population data for each state.")
+    print("When you are done entering data, type 'done' for the state name.\n")
+
+    while True:
+        year = input("Enter year (e.g., 2010): ")
+        if not year.isdigit():
+            print("Please enter a valid year (numbers only).")
+            continue
+        year = int(year)
+
+        state = input("Enter state name (or 'done' to finish): ")
+        if state.lower() == 'done':
+            break
+
+        population = input(f"Enter population for {state} in {year}: ")
+        if not population.isdigit():
+            print("Please enter a valid population number.")
+            continue
+        population = int(population)
+
+        all_entered_values.append([year, state, population])
+
+    year_to_sum = int(input("\nEnter a year to calculate total population for: "))
+
+    sum_population_for_year(all_entered_values, year_to_sum)
+
 
 def sum_population_for_year(all_entered_values, year_to_sum):
-    # Loop through and sum the populations for the appropriate year. 
-    # e.g. for the list on line 7 the total would be 8,860,637 if the user enterd 2010 for the year to sum,
-    # or 3,421,988 if they enterd 2011 for the year to sum.
+    total_population = 0
 
-    # print the totalled population
+    for record in all_entered_values:
+        year, state, population = record
+        if year == year_to_sum:
+            total_population += population
+
+    print(f"\nTotal population for the year {year_to_sum}: {total_population}")
 
 
-# Call the main function.
 if __name__ == '__main__':
     main()
